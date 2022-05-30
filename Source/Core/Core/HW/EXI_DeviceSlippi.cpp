@@ -696,6 +696,8 @@ void CEXISlippi::prepareGameInfo(u8 *payload)
 	auto replayCommSettings = g_replayComm->getSettings();
 	if (!g_playbackStatus->isHardFFW)
 		g_playbackStatus->isHardFFW = replayCommSettings.mode == "mirror";
+	if (replayCommSettings.mode == "mirror")
+		wxGetApp().GetCFrame()->UpdateTitle(scm_rev_str + " - " + g_replayComm->current.gameStation);
 	g_playbackStatus->lastFFWFrame = INT_MIN;
 
 	// Build a word containing the stage and the presence of the characters
