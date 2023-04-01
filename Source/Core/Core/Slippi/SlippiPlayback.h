@@ -26,6 +26,10 @@ class SlippiPlaybackStatus
 	s32 currentPlaybackFrame = INT_MIN;
 	s32 targetFrameNum = INT_MAX;
 	s32 latestFrame = Slippi::GAME_FIRST_FRAME;
+	bool replayTakeoverEnabled = false;
+	u32 replayTakeoverStartFrame = INT_MAX;
+	u32 replayTakeoverLoopFrame = INT_MAX;
+	u8 replayTakeoverPlayerNumber = 0;
 
 	bool prevOCEnable;
 	float prevOCFactor;

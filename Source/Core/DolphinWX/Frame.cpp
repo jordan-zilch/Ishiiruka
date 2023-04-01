@@ -405,7 +405,7 @@ CFrame::CFrame(wxFrame *parent, wxWindowID id, const wxString &title, wxRect geo
 		slippiSizer->Add(seekBarText, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 		m_Mgr->AddPane(slippiPanel, wxAuiPaneInfo()
 										.Name(_("Slippi Pane"))
-										.Caption(_("Space: Pause/Play. Left Arrow: Rewind 5 seconds. Right Arrow: Fast forward 5 seconds. Period: Advance one frame. Large fast-forwards might be slow."))
+										.Caption(_("Space: Pause/Play. Left Arrow: Rewind 5 seconds. Right Arrow: Fast forward 5 seconds. Period: Advance one frame. F: Toggle replay takeover. Large fast-forwards might be slow."))
 										.CaptionVisible(true)
 										.Layer(1)
 										.CloseButton(false)
@@ -1652,6 +1652,14 @@ void CFrame::ParseHotkeys()
 
 		if (IsHotkey(HK_JUMP_FORWARD))
 			g_playbackStatus->shouldJumpForward = true;
+
+		
+		if (IsHotkey(HK_TOGGLE_TAKEOVER))
+		{
+			g_playbackStatus->replayTakeoverEnabled = !g_playbackStatus->replayTakeoverEnabled;
+			OSD::AddMessage(g_playbackStatus->replayTakeoverEnabled ? "Replay Takeover Enabled"
+			                                                        : "Replay Takeover Disabled", 7000U);
+		}
 
 		if (!m_Mgr->GetPane(_("Slippi Pane")).IsShown()) 
 		{

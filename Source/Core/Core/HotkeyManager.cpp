@@ -147,6 +147,7 @@ const std::string hotkey_labels[] = {
 		_trans("Pause/Unpause"),
 		_trans("Jump Forwards 5 Seconds"),
 		_trans("Toggle Seekbar"),
+        _trans("Toggle Replay Takeover")
 };
 static_assert(NUM_HOTKEYS == sizeof(hotkey_labels) / sizeof(hotkey_labels[0]),
 	"Wrong count of hotkey_labels");
@@ -259,7 +260,7 @@ const std::array<HotkeyGroupInfo, NUM_HOTKEY_GROUPS> groups_info = {
 		 {_trans("Select state"), HK_SELECT_STATE_SLOT_1, HK_SELECT_STATE_SLOT_10},
 		 {_trans("Load last state"), HK_LOAD_LAST_STATE_1, HK_LOAD_LAST_STATE_10},
 		 {_trans("Other state hotkeys"), HK_SAVE_FIRST_STATE, HK_RELOAD_POSTPROCESS_SHADERS},
-		 {_trans("Replay Controls"), HK_JUMP_BACK, HK_HIDE_SEEKBAR} }};
+		 {_trans("Replay Controls"), HK_JUMP_BACK, HK_TOGGLE_TAKEOVER}}};
 ;
 
 HotkeyManager::HotkeyManager()
@@ -424,6 +425,7 @@ void HotkeyManager::LoadDefaults(const ControllerInterface& ciface)
 	set_key_expression(HK_TOGGLE_PLAY_PAUSE, "space");
 	set_key_expression(HK_JUMP_FORWARD, "Right");
 #endif
+	set_key_expression(HK_TOGGLE_TAKEOVER, "F");
 #endif
 
 #ifdef _WIN32
