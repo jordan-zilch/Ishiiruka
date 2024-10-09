@@ -1654,11 +1654,9 @@ void CFrame::ParseHotkeys()
 			g_playbackStatus->shouldJumpForward = true;
 
 		
-		if (IsHotkey(HK_TOGGLE_TAKEOVER))
+		if (IsHotkey(HK_TOGGLE_TAKEOVER) && !g_playbackStatus->isSoftFFW && !g_playbackStatus->isHardFFW)
 		{
-			g_playbackStatus->replayTakeoverEnabled = !g_playbackStatus->replayTakeoverEnabled;
-			OSD::AddMessage(g_playbackStatus->replayTakeoverEnabled ? "Replay Takeover Enabled"
-			                                                        : "Replay Takeover Disabled", 7000U);
+			g_playbackStatus->toggleReplayTakeover();
 		}
 
 		if (!m_Mgr->GetPane(_("Slippi Pane")).IsShown()) 

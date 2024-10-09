@@ -42,6 +42,9 @@ class SlippiPlaybackStatus
 	bool shouldFFWFrame(int32_t frameIndex) const;
 	void prepareSlippiPlayback(s32 &frameIndex);
 	void setHardFFW(bool enable);
+	void enableReplayTakeover(void);
+	void disableReplayTakeover(void);
+	void toggleReplayTakeover(void);
 	std::unordered_map<u32, bool> getDenylist();
 	std::vector<u8> getLegacyCodelist();
 

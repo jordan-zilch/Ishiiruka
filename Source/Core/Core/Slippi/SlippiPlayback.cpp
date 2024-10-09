@@ -357,6 +357,38 @@ bool SlippiPlaybackStatus::shouldFFWFrame(int32_t frameIndex) const
 	return (frameIndex - lastFFWFrame) >= 15;
 }
 
+void SlippiPlaybackStatus::enableReplayTakeover() 
+{
+	if (g_replayComm->getSettings().rollbackDisplayMethod != "off")
+	{
+		OSD::AddMessage("Replay Takeover is not possible with rollback display turned on.");
+		return;
+	}
+	replayTakeoverEnabled = true;
+	// Save state of current frame in future diffs
+	bool isStartFrame = currentPlaybackFrame == Slippi::PLAYBACK_FIRST_SAVE;
+	bool hasStateBeenProcessed = futureDiffs.count(currentPlaybackFrame) > 0;
+	OSD::AddMessage("Replay Takeover Enabled", 7000U);
+	
+}
+
+void SlippiPlaybackStatus::disableReplayTakeover() 
+{
+	replayTakeoverEnabled = false;
+	OSD::AddMessage("Replay Takeover Disabled", 7000U);
+}
+
+void SlippiPlaybackStatus::toggleReplayTakeover() {
+	if (!replayTakeoverEnabled)
+	{
+		enableReplayTakeover();
+	}
+	else
+	{
+		disableReplayTakeover();
+	}
+}
+
 void SlippiPlaybackStatus::updateWatchSettingsStartEnd()
 {
 	int startFrame = g_replayComm->current.startFrame;
